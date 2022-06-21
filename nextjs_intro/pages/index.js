@@ -19,6 +19,7 @@ export default function Home() {
   return (
     <div>
       <Title title="Home" />
+      {!movies && <h4>Loading...</h4>}
       {movies?.map((item) => (
         <div key={item.id}>
           <h4>{item.original_title}</h4>
