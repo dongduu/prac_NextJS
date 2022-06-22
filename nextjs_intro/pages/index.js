@@ -22,7 +22,7 @@ export default function Home() {
       {!movies && <h4>Loading...</h4>}
       {movies?.map((item) => (
         <div className="movie" key={item.id}>
-          <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+          <img src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} />
           <h4>{item.original_title}</h4>
         </div>
       ))}
