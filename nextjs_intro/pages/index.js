@@ -4,17 +4,38 @@ import Title from "../components/Title";
 
 export default function Home({ results }) {
   const router = useRouter();
-  const onClick = (id) => {
-    router.push(`/movies/${id}`);
+  const onClick = (id, title) => {
+    router.push(
+      {
+        pathname: `/movies/${id}`,
+        query: {
+          title,
+        },
+      },
+      `/movies/${id}`
+    );
   };
   return (
     <div className="container">
       <Title title="Home" />
       {results?.map((item) => (
-        <div onClick={() => onClick(item.id)} className="movie" key={item.id}>
+        <div
+          onClick={() => onClick(item.id, item.original_title)}
+          className="movie"
+          key={item.id}
+        >
           <img src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} />
           <h4>
-            <Link href={`/movies/${item.id}`} key={item.id}>
+            <Link
+              href={{
+                pathname: `/movies/${item.id}`,
+                query: {
+                  title: item.original_title,
+                },
+              }}
+              as={`/movies/${item.id}`}
+              key={item.id}
+            >
               <a>{item.original_title} </a>
             </Link>
           </h4>
