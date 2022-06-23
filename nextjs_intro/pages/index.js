@@ -1,14 +1,23 @@
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Title from "../components/Title";
 
 export default function Home({ results }) {
+  const router = useRouter();
+  const onClick = (id) => {
+    router.push(`/movies/${id}`);
+  };
   return (
     <div className="container">
       <Title title="Home" />
       {results?.map((item) => (
-        <div className="movie" key={item.id}>
+        <div onClick={() => onClick(item.id)} className="movie" key={item.id}>
           <img src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`} />
-          <h4>{item.original_title}</h4>
+          <h4>
+            <Link href={`/movies/${item.id}`} key={item.id}>
+              <a>{item.original_title} </a>
+            </Link>
+          </h4>
         </div>
       ))}
       <style jsx>{`
